@@ -1,0 +1,35 @@
+// 1980. Find Unique Binary String  
+// brute force 
+class Solution {
+public:
+    string findDifferentBinaryString(vector<string>& nums) {
+        unordered_set<int>st;
+        for(string &num : nums){
+            st.insert(stoi(num,0,2));
+
+        }
+        int n = nums.size();
+        string res ="";
+        for(int num =0; num<= n ; num++){
+            if(st.find(num) == st.end()){
+                res = bitset<16>(num).to_string();
+                return res.substr(16-n , n);
+            }
+        }
+        return "";
+    }
+};
+
+//optimal o(n)
+class Solution {
+public:
+    string findDifferentBinaryString(vector<string>& nums) {
+       int n= nums.size();
+       string res ="";
+       for(int i=0 ; i<n ; i++){
+        char ch = nums[i][i];
+        res+= (ch=='0') ? '1' : '0';
+       }
+       return res ;
+    }
+};
